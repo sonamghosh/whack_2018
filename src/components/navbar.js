@@ -3,11 +3,6 @@ import React, { Component } from 'react';
 import musicBoi from '../images/musicBoiLogo2.png';
 
 class Navbar extends Component {
-  mainTab = function() {
-    this.props.mainTab(this.state.view);
-    this.setState({view: 1});
-  }
-
   render() {
     return(
       <div className="navbar">

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "algoliasearch": "^3.30.0",
+    "autocomplete.js": "^0.31.0",
     "onedb-client": "^0.1.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

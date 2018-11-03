@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './content/App.css';
+import algoliasearch from 'algoliasearch';
+import autocomplete from 'autocomplete.js';
 import Navbar from './components/navbar';
 import Header from './components/header';
 import StockFindAR from './components/stockFindAR';
@@ -8,6 +10,7 @@ import Resources from './components/resources';
 import About from './components/about';
 
 class App extends Component {
+  // Constructor to set initial states
   constructor(props){
     super(props);
     this.state = {
@@ -16,11 +19,17 @@ class App extends Component {
     }
   }
 
+  // Change tabs onClick from Navbar
   changeTab = (tabName) => {
     this.setState({view: [tabName]});
   }
 
+  // Render the JSX
   render() {
+    // Init algoliasearch and index
+    var client = algoliasearch('F7HFR1MH0G', '6dc685dc57968d5a67e816916887382c');
+    var index = client.initIndex('stockAR');
+
     return (
       <div className="App">
         <Navbar
