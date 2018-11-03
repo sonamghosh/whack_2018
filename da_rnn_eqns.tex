@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\title{Dual Stage Attention Based Recurrent Neural Network for Time Series (Qin et. al.) Mathematical Model}
+\author{Sonam Ghosh}
+\date{October 2018}
+
+\begin{document}
+
+\maketitle
+\noindent First Stage - Input attention mechanism to adaptively extract relevant input features at each time step by referring to previous encoder hidden State. \newline
+Second Stage - Temporal Attention mechanism to select relevant encoder hidden states across all time steps. \newline
+Given $n$ driving series (input features):
+$$ \textbf{X} = (\textbf{x}^{1}, \textbf{x}^{2}, \hdots, \textbf{x}^{n})^{\intercal} = (\textbf{x}_{1}, \textbf{x}_{2}, \hdots, x_{T}) \in \mathbb{R}^{n \times T}$$
+Where $T$ is the length of window size and 
+$$ \textbf{x}_{t} = (x_{t}^{1}, x_{t}^{2}, \hdots, x_{t}^{n})^{\intercal} \in \mathbb{R}^{n}$$
+Is the vector of $n$ exogenous input series at time $t$. 
+Previous values of the target series is given by
+$$ (y_{1}, y_{2}, \hdots, y_{T-1}) $$
+where $y_{t} \in \mathbb{R}$. \newline
+The model learns a \textbf{nonlinear} mapping ($F(\cdot)$ nonlinear func) to the current value of the target series $y_{T}$:
+\begin{equation}
+    \hat{y}_{T} = F(y_{1}, \hdots, y_{T-1}, \textbf{x}_{1}, \hdots, \textbf{x}_{T})
+\end{equation}
+\textbf{Encoder} - RNN that encodes input sequences into feature representation for machine trnanslation. \newline
+For an input sequence $\textbf{X} = (\textbf{x}_{1}, \textbf{x}_{2}, \hdots, \textbf{x}_{T}), \textbf{x}_{T} \in \mathbb{R}^{n}$ , the encoder is appled to learn a mapping from $\textbf{x}_{t} \rightarrow \textbf{h}_{t}$:
+\begin{equation}
+    \textbf{h}_{t} = f_{1}(\textbf{h}_{t-1}, \textbf{x}_{t})
+\end{equation}
+Where $\textbf{h}_{t} \in \mathbb{R}^{m}$ is the hidden state of the encoder at time $t$, $m$ is the size of the hidden state, and $f_{1}$ is a non-linear activation function where a LSTM is used. \newpage
+\noindent The LSTM unit has a memory cell with state $\textbf{s}_{t}$ at time $t$ that is controlled by three sigmoid gates---the forget gate $\textbf{f}_{t}$, input gate $\textbf{i}_{t}$, and output gate $\textbf{o}_{t}$ formulated as follows:
+\begin{equation}
+    \textbf{f}_{t} = \sigma(\textbf{W}_{f}[\textbf{h}_{t-1};\textbf{x}_{t}] + \textbf{b}_{f})
+\end{equation}
+\begin{equation}
+    \textbf{i}_{t} = \sigma(\textbf{W}_{i}[\textbf{h}_{t-1};\textbf{x}_{t}] + \textbf{b}_{i})
+\end{equation}
+\begin{equation}
+    \textbf{o}_{t} = 
+    \sigma(\textbf{W}_{o}[\textbf{h}_{t-1};\textbf{x}_{t}] + \textbf{b}_{o})
+\end{equation}
+\begin{equation}
+    \textbf{s}_{t} = \textbf{f}_{t} \odot \textbf{s}_{t-1} + \textbf{i}_{t} \odot \tanh(\textbf{W}_{s}[\textbf{h}_{t-1}; \textbf{x}_{t}] + \textbf{b}_{s})
+\end{equation}
+\begin{equation}
+    \textbf{h}_{t} = \textbf{o}_{t} \odot \tanh(\textbf{s}_{t})
+\end{equation}
+Where $[\textbf{h}_{t-1}; \textbf{x}_{t}] \in \mathbb{R}^{m+n}$ is a concatenation of the previous hidden state $\textbf{h}_{t-1}$ and current input $\textbf{x}_{t}$. $\textbf{W}_{f}, \textbf{W}_{i}, \textbf{W}_{o}, \textbf{W}_{s} \in \mathbb{R}^{m \times (m+n)}$ and $\textbf{b}_{f}, \textbf{b}_{i}, \textbf{b}_{o}, \textbf{b}_{s} \in \mathbb{R}^{m}$ are learning parameters. $\sigma$ and $\odot$ are the logistic sigmoid function and element-wise multiplication respectively.  \newline
+\textbf{Input attention based encoder} - adaptively select relevant driving series. \newline
+Given an $k$-th input driving series $\textbf{x}^{k} = (x_{1}^{k}, x_{2}^{k}, \hdots, x_{T}^{k})^{\intercal} \in \mathbb{R}^{T}$. The input attention mechanism is given by a multi-layer perceptron, referring to previous hidden state $\textbf{h}_{t-1}$ and unit cell $\textbf{s}_{t-1}$ in the encoder LSTM unit given by:
+\begin{equation}
+    e_{t}^{k} = \textbf{v}_{e}^{\intercal}\tanh(\textbf{W}_{e}[\textbf{h}_{t-1}; \textbf{s}_{t-1}] + \textbf{U}_{e}\textbf{x}^{k})
+\end{equation}
+\begin{equation}
+    \alpha_{t}^{k} = \frac{ \exp(e_{t}^{k})}{\sum_{i=1}^{n} \exp(e_{t}^{i})}
+\end{equation}
+where $\textbf{v}_{e} \in \mathbb{R}^{T}, \mathbb{W}_{e} \in \mathbb{R}^{T \times 2m}, \textbf{U}_{e} \in \mathbb{R}^{T \times T}$ are learning parameters. $\alpha_{t}^{k}$ is the attention weight that measures importance of $k$-th input feature at time $t$. \newline
+Adaptively extract driving series with
+\begin{equation}
+    \tilde{\textbf{x}}_{t} = (\alpha_{t}^{1}x_{t}^{1}, \alpha_{t}^{2}x_{t}^{2}, \hdots, \alpha_{t}^{n}x_{t}^{n})^{\intercal}
+\end{equation}
+Hidden state at time $t$ is updated to
+\begin{equation}
+    \textbf{h}_{t} = f_{1}(\textbf{h}_{t-1}, \tilde{\textbf{x}}_{t})
+\end{equation}
+\textbf{Decoder} - utilization of another LSTM unit to decode the encoded input information to predict $\hat{y}_{T}$. \newpage \noindent
+Temporal attention is used to adaptively select relevant encoder hidden states across all time. Attention weight comes from previous decoder hidden state $\textbf{d}_{t-1} \in \mathbb{R}^{p}$ and cell state of LSTM unit $
+\textbf{s'}_{t-1} \in \mathbb{R}^{p}$:
+\begin{equation}
+    l_{t}^{i} = \textbf{v}_{d}^{\intercal}\tanh(\textbf{W}_{d}[\textbf{d}_{t-1}; \textbf{s'}_{t-1}] + \textbf{U}_{d}\textbf{h}_{i}), \hspace{25pt} 1 \leq i \leq T
+\end{equation}
+\begin{equation}
+    \beta_{t}^{i} = \frac{ \exp(l_{t}^{i})}{\sum_{j=1}^{T} \exp(l_{t}^{j})}
+\end{equation}
+Where $[\textbf{d}_{t-1}; \textbf{s'}_{t-1}] \in \mathbb{R}^{2p}$ is a concatenation of previous hidden state and cell state of LSTM unit. $\textbf{v}_{d} \in \mathbb{R}^{m}, \textbf{W}_{d} \in \mathbb{R}^{m \times 2p}, \textbf{U}_{d} \in \mathbb{R}^{m \times m}$ are learning parameters. Attention weight $\beta_{t}^{i}$ represents importance of $i$-th encoder hidden state for prediction. \newline
+After mapping of encoder hidden state to temporal component of input, the attention mechanism provides the context vector as a weighted sum of all encoder hidden states:
+\begin{equation}
+    \textbf{c}_{t} = \sum_{i=1}^{T} \beta_{t}^{i}\textbf{h}_{i}
+\end{equation}
+Combine with given target series $(y_{1}, y_{2}, \hdots y_{T-1})$:
+\begin{equation}
+    \tilde{y}_{t-1} = \tilde{\textbf{w}}^{\intercal}[y_{t-1}; \textbf{c}_{t-1}] + \tilde{b}
+\end{equation}
+where $[y_{t-1}; \textbf{c}_{t-1}] \in \mathbb{R}^{m+1}$ is concatenation of the decoder input $y_{t-1}$ and context vector $\textbf{c}_{t-1}$. $\tilde{\textbf{w}} \in \mathbb{R}^{m+1}, \tilde{b} \in \mathbb{R}$ map concatenation to size of decoder input. Update of decoder hidden state is given by:
+\begin{equation}
+    \textbf{d}_{t} = f_{2}(\textbf{d}_{t-1}, \tilde{y}_{t-1})
+\end{equation}
+Where $f_{2}$ the nonlinear function is another LSTM unit for long-term dependency modeling. The update functions are given by
+\begin{equation}
+    \textbf{f}'_{t} = \sigma(\textbf{W}'_{f}[\textbf{d}_{t-1}; \tilde{y}_{t-1}] + \textbf{b}'_{f})
+\end{equation}
+\begin{equation}
+    \textbf{i}'_{t} = 
+    \sigma(\textbf{W}'_{i}[\textbf{d}_{t-1}; \tilde{y}_{t-1}] + \textbf{b}'_{i})
+\end{equation}
+\begin{equation}
+    \textbf{o}'_{t} = 
+    \sigma(\textbf{W}'_{o}[\textbf{d}_{t-1}; \tilde{y}_{t-1}] + \textbf{b}'_{o})
+\end{equation}
+\begin{equation}
+    \textbf{s}'_{t} = \textbf{f}'_{t} \odot \textbf{s}'_{t-1} + \textbf{i}'_{t} \odot \tanh(\textbf{W}'_{s}[\textbf{d}_{t-1}; \tilde{y}_{t-1}] + \textbf{b}'_{s})
+\end{equation}
+\begin{equation}
+    \textbf{d}_{t} = \textbf{o}'_{t} \odot \tanh(\textbf{s}'_{t})
+\end{equation}
+Where $[\textbf{d}_{t-1}; \tilde{y}_{t=1}] \in \mathbb{R}^{p+1}$ is the concatenation of previous hidden state $\textbf{d}_{t-1}$ and decoder input $\tilde{y}_{t-1}$. $\textbf{W}'_{f}, \textbf{W}'_{i}, \textbf{W}'_{o}, \textbf{W}'_{s} \in \mathbb{R}^{p\times(p+1)}, \textbf{b}'_{f}, \textbf{b}'_{i}, \textbf{b}'_{o}, \textbf{b}'_{s} \in \mathbb{R}^{p}$ are learning parameters.
+\newpage \noindent
+Model is used to approximate the function $F$, the nonlinear mapping function to obtain an estimate of current output $\hat{y}_{T}$ with observation of all inputs as well as previous outputs.
+\begin{equation}
+\begin{aligned}
+    \hat{y}_{T} &= F(y_{1}, \hdots, y_{T-1}, \textbf{x}_{1}, \hdots , 
+    \textbf{x}_{T})\\
+    &= \textbf{v}_{y}^{\intercal}(\textbf{W}_{y}[\textbf{d}_{T}; \textbf{c}_{T}] + \textbf{b}_{w}) + b_{v}
+\end{aligned}
+\end{equation}
+where $[\textbf{d}_{T}; \textbf{c}_{T}] \in \mathbb{R}^{p+m}$ is a concatenation of the decoder hidden state and the context vector. $\textbf{W}_{y} \in \mathbb{R}^{p \times (p+m)}, \textbf{b}_{w} \in \mathbb{R}^{p}$ map the concatenation to size of decoder hidden states. Linear function with weights $\textbf{v}_{y} \in \mathbb{R}^{p}, b_{v} \in \mathbb{R}$ provides the final prediction result. \newline
+Minibatch Stochastic Gradient descent with Adam Optimizer is used to \textbf{train} the model. Mini batch size---128, learning rate---0.001 and reduced by $10\%$ after 10000 iterations. DARNN is smooth and differentiable. Objective function is given by
+\begin{equation}
+    \mathcal{O}(y_{T}, \hat{y}_{T}) = \frac{1}{N} \sum_{i=1}^{N}(\hat{y}_{T}^{i} - y_{T}^{i})^{2}
+\end{equation}
+Where $N$ is number of training samples. 
+
+\end{document}
