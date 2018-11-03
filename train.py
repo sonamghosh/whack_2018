@@ -182,14 +182,15 @@ def predict(t_net: DaRnnNet, t_dat: TrainData, train_size: int, batch_size: int,
 save_plots = True
 debug = False
 
-raw_data = pd.read_csv(os.path.join("data", "nasdaq100_padding.csv"), nrows=100 if debug else None)
+raw_data = pd.read_csv(os.path.join("data", "iex_nasdaq100_dataset.csv"), nrows=100 if debug else None)
 logger.info(f"Shape of data: {raw_data.shape}.\nMissing in data: {raw_data.isnull().sum().sum()}.")
-targ_cols = ("NDX",)
+#targ_cols = ("NDX",)
+targ_cols = ("AAPL",)
 data, scaler = preprocess_data(raw_data, targ_cols)
 
 da_rnn_kwargs = {"batch_size": 128, "T": 10}
 config, model = da_rnn(data, n_targs=len(targ_cols), learning_rate=.001, **da_rnn_kwargs)
-iter_loss, epoch_loss = train(model, data, config, n_epochs=10, save_plots=save_plots)
+iter_loss, epoch_loss = train(model, data, config, n_epochs=50, save_plots=save_plots)
 final_y_pred = predict(model, data, config.train_size, config.batch_size, config.T)
 
 plt.figure()
