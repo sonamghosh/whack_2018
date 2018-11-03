@@ -3,6 +3,7 @@ import pandas as pd
 import arrow
 import datetime
 import os
+import glob
 
 # This script fetches up to date datasets
 
@@ -13,17 +14,25 @@ def get_quote_data(symbol='SBIN.NS', data_range='1d', data_interval='1m'):
 
     Params:
     symbol - Which stock
-    date_range - How far back starting from latest closing time (1d, 1m, 1Y, 5Y are choices)
-    date_interval - rate at which stock data is aggregated (1m, 15m, 60m are the choices)
+    date_range - How far back starting from latest closing time
+    date_interval - rate at which stock data is aggregated 
+
+    Constraints:
+    1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo - possible values for date_interval
+    1m date_interval has max of date_range = 1wo
+    5m, 15m date_interval has max date_range = 1mo
 
     Returns:
     Pandas dataframe containing Opening Price High Price Low Price Closing Price and Volume
     with the time stamp givne as YYYY-MM-DD HH:MM:SS
+
     """
 
     res = requests.get('https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range={data_range}&interval={data_interval}'.format(**locals()))
+    print(res.raise_for_status())  # error checking
     data = res.json()
     body = data['chart']['result'][0]    
+    print(body['meta']['validRanges'])
     dt = datetime.datetime
     dt = pd.Series(map(lambda x: arrow.get(x).datetime.replace(tzinfo=None), body['timestamp']), name='Datetime')
     df = pd.DataFrame(body['indicators']['quote'][0], index=dt)
@@ -60,12 +69,26 @@ def save_csv(dataset, symbol):
 
     # Rename CLOSE name to Ticker name
     dataset = dataset.rename(columns={'CLOSE': symbol})
-    print(dataset)
+    #print(dataset)
     # File name in format of ticker + date range .csv
     filename = symbol + '_' + dataset.index[0].date().strftime('%Y_%m_%d') + '_to_' + dataset.index[-1].date().strftime('%Y_%m_%d') +'.csv'
     dataset.to_csv(directory + '/' + filename)
 
 
+def create_dataset():
+    print('Hello World')
+    path = './data/sub_data'
+    all_files = glob.glob(path + "/*.csv")
+    dframe = pd.DataFrame()
+    lst = []
+    for file in all_files:
+        df = pd.read_csv(file, index_col=None, header=0)
+        lst.append(df)
+    #dframe = pd.merge(lst[0], lst[1])
+    dframe = pd.concat([lst[0], lst[1]], join='inner',axis=1).drop(['Datetime'], axis=1)
+    print(dframe)
+    path_2 = './data/'
+    dframe.to_csv(path_2 + 'full_nasdaq100_dataset.csv')
 
 # Testing
 #data = get_quote_data('AAPL', '1d', '1m')
@@ -73,8 +96,16 @@ def save_csv(dataset, symbol):
 #d = get_close_price(data)
 #print(d)
 if __name__ == "__main__":
-    data = get_quote_data('AAPL', '1Y', '1m')
+    data = get_quote_data('AAPL', '1y', '1h')
     print(type(data.index[0].date().strftime('%Y_%m_%d')))
     print(data.index[-1].date())
     data = get_close_price(data)
+    print(data.shape)
     save_csv(data, 'AAPL')
+    d2 = get_quote_data('AAL', '1y', '1h')
+    d2 = get_close_price(d2)
+    print(d2.shape)
+    save_csv(d2, 'AAL')
+    import numpy as np
+    #print(pd.merge(data, d2))
+    create_dataset()
