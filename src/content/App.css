@@ -18,6 +18,7 @@
   color: #fff;
 }
 .search{
+  width: 200px;
   border-radius: 1px;
   padding: 10px;
   border: none;
@@ -47,7 +48,7 @@
   text-shadow: none;
 }
 .loginContainer {
-  flex: 2;
+  flex: 3;
 }
 .username, .password{
   border-radius: 1px;
@@ -66,9 +67,9 @@
 
 
 .header {
-  background-image:url('../images/compassBackground.jpeg');
+  background-image:url('../images/coolLines.jpeg');
   background-size: 100% 100%;
-  min-height:400px;
+  min-height:100vh;
   padding: 50px;
   color: #fff;
 }
@@ -86,8 +87,8 @@
   padding: 50px;
   color: #fff;
 }
-.useCasesContainer, .aboutContainer{
-  background-color:rgba(192,192,192,0.5);
+.useCasesContainer, .aboutContainer, .resourcesContainer{
+  background-color:rgba(192,192,192,0.9);
   border-radius: 1px;
   width: 50%;
   margin: auto;
@@ -96,10 +97,10 @@
   margin-top: 50px;
 }
 .useCasesContainer p, .useCasesContainer h3, .useCasesContainer h1 {
-    text-shadow: 1px 1px black;
+
 }
 .resources{
-  background-image:url('../images/coolLines.jpeg');
+  background-image:url('../images/resources.jpeg');
   background-size: 100% 100%;
   min-height:100vh;
   padding: 50px;
@@ -113,5 +114,4 @@
   color: #fff;
 }
 .aboutContainer p, .aboutContainer h3, .aboutContainer h1 {
-    text-shadow: 1px 1px black;
 }

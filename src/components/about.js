@@ -6,7 +6,13 @@ class About extends Component {
       <div className="about">
         <div className="aboutContainer">
           <h1>About Us</h1>
-          <h3>We're a growing startup founded by 3 people. </h3>
+            <h2>We're a rapidly growing startup founded by 3 people at Hack Wellesley 2018.</h2>
+            <h3>Sonam Ghosh</h3>
+              <p>Machine Learning developer</p>
+            <h3>Brian He</h3>
+              <p>Augmented Reality developer</p>
+            <h3>Halmon Lui</h3>
+              <p>FullStack developer</p>
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ class Navbar extends Component {
   render() {
     return(
       <div className="navbar">
-        <a className="logo">
+        <a className="logo" onClick={this.props.changeHome}>
           <p>Stock FindAR</p>
         </a>
         <div>
@@ -23,11 +23,14 @@ class Navbar extends Component {
             />
           </form>
         </div>
-        <div className="navTab">
-          <a onClick={this.props.changeStockFindAR} className="navLink">
-            <p> Stock FindAR </p>
-          </a>
-        </div>
+        {
+          this.props.loggedOn &&
+          <div className="navTab">
+            <a onClick={this.props.changeStockFindAR} className="navLink">
+              <p> Stock FindAR </p>
+            </a>
+          </div>
+        }
         <div className="navTab">
           <a onClick={this.props.changeUseCases} className="navLink">
             <p> Use Cases </p>
@@ -52,6 +55,12 @@ class Navbar extends Component {
               <input type="submit" value="Submit" className="submit"/>
             </form>
           </div>
+        }
+        {
+          this.props.loggedOn &&
+          <form>
+            <input type="submit" value="Submit" className="submit"/>
+          </form>
         }
       </div>
     );

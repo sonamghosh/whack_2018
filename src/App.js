@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      view: "main",
+      view: "home",
       loggedOn: false,
     }
   }
@@ -24,6 +24,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar
+          changeHome={() => this.changeTab("home")}
           changeStockFindAR={() => this.changeTab("stockFindAR")}
           changeUseCases={() => this.changeTab("useCases")}
           changeResources={() => this.changeTab("resources")}
@@ -35,7 +36,7 @@ class App extends Component {
         </header>
 
         <body className="App-body">
-          {(this.state.view == "main") && <Header />}
+          {(this.state.view == "home") && <Header />}
           {(this.state.view == "stockFindAR") && <StockFindAR />}
           {(this.state.view == "useCases") && <UseCases />}
           {(this.state.view == "resources") && <Resources />}
