@@ -4,6 +4,7 @@ import arrow
 import datetime
 import os
 import glob
+import time
 
 # This script fetches up to date datasets
 
@@ -87,43 +88,67 @@ def grab_from_iex(symbol, start, end):
     dfs = []
     # Make HTTPS request
     for i in t:
-        print(i)
         res = requests.get('https://api.iextrading.com/1.0/stock/'+symbol+'/chart/date/'+i)
         req_data = res.json()
         # Error Checker for nulls
         if req_data == []:
-            raise ValueError('The following stock has no data on IEX: ', symbol)
+            #raise ValueError('The following stock has no data on IEX: ', symbol)
+            continue
         df = pd.DataFrame(req_data)
         df = df[['close']]
         df = df.rename(columns={'close':symbol.upper()})
+        # Fill NaNs with preceding value
+        df = df.fillna(method='ffill')
+        df.set_index(symbol.upper(), inplace=True)
         #print(df.shape)
         dfs.append(df)
     #print(dfs)
     # Concat into one dataframe
     tot_df = pd.concat(dfs, axis=0)
-    print(tot_df)
+    #print(tot_df)
 
-    directory = './data/sub_data'
+    # Save individual stock to CSV
+    directory = './data/sub_data_2'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    filename = symbol.upper() + '_' + dates[0].strftime('%Y%m%d') + '_to_' + dates[-1].strftime('%Y%m%d') + '.csv'
+    tot_df.to_csv(directory + '/' + filename)
 
 
 
-
-
-def create_dataset():
+def create_dataset(source='iex'):
     print('Hello World')
-    path = './data/sub_data'
-    all_files = glob.glob(path + "/*.csv")
-    dframe = pd.DataFrame()
-    lst = []
-    for file in all_files:
-        df = pd.read_csv(file, index_col=None, header=0)
-        lst.append(df)
-    #dframe = pd.merge(lst[0], lst[1])
-    dframe = pd.concat(lst, join='inner',axis=1).drop(['Datetime'], axis=1)
-    dframe.set_index('AAL', inplace=True)
-    print(dframe)
-    path_2 = './data/'
-    dframe.to_csv(path_2 + 'full_nasdaq100_dataset.csv')
+    if source == 'yahoo': 
+        path = './data/sub_data'
+        all_files = glob.glob(path + "/*.csv")
+        dframe = pd.DataFrame()
+        lst = []
+        for file in all_files:
+            df = pd.read_csv(file, index_col=None, header=0)
+            lst.append(df)
+        #dframe = pd.merge(lst[0], lst[1])
+        dframe = pd.concat(lst, join='inner',axis=1).drop(['Datetime'], axis=1)
+        dframe.set_index('AAL', inplace=True)
+        print(dframe)
+        path_2 = './data/'
+        dframe.to_csv(path_2 + 'full_nasdaq100_dataset.csv')
+
+    elif source == 'iex':
+        path = './data/sub_data_2'
+        all_files = glob.glob(path + "/*.csv")
+        print(all_files)
+        dframe = pd.DataFrame()
+        lst = []
+        for file in all_files:
+            df = pd.read_csv(file, index_col=None, header=0)
+            lst.append(df)
+        dframe = pd.concat(lst, join='inner', axis=1)
+        #dframe.set_index('AAL', inplace=True)
+        path_2 = './data/'
+        dframe.to_csv(path_2 + 'iex_nasdaq100_dataset.csv')
+    else:
+        print('Other sources not supported yet')
+
 
 # Testing
 #data = get_quote_data('AAPL', '1d', '1m')
@@ -131,7 +156,23 @@ def create_dataset():
 #d = get_close_price(data)
 #print(d)
 if __name__ == "__main__":
-    grab_from_iex('aal', start='2018-10-02', end='2018-11-02')
+    start = time.time()
+    #grab_from_iex('aal', start='2018-10-02', end='2018-11-02')
+    
+    ticks = grab_tickers(filename='stock_name.txt')
+    for tick in ticks:
+        print('Starting this stock: ', tick)
+        grab_from_iex(tick, start='2018-10-02', end='2018-11-02')
+    
+    create_dataset(source='iex')
+
+
+
+
+
+    end = time.time()
+    print('Time Elapsed: ', end - start, ' s')
+
     """
     data = get_quote_data('AAPL', '1y', '1h')
     print(type(data.index[0].date().strftime('%Y_%m_%d')))
