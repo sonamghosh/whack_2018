@@ -52,13 +52,18 @@ def grab_tickers(filename='stock_name.txt'):
     return content
 
 
-def save_csv(dataframe, symbol):
+def save_csv(dataset, symbol):
     directory = './data/sub_data'
     # Create sub directory to save individual csvs
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    
+    # Rename CLOSE name to Ticker name
+    dataset = dataset.rename(columns={'CLOSE': symbol})
+    print(dataset)
+    # File name in format of ticker + date range .csv
+    filename = symbol + '_' + dataset.index[0].date().strftime('%Y_%m_%d') + '_to_' + dataset.index[-1].date().strftime('%Y_%m_%d') +'.csv'
+    dataset.to_csv(directory + '/' + filename)
 
 
 
@@ -68,3 +73,8 @@ def save_csv(dataframe, symbol):
 #d = get_close_price(data)
 #print(d)
 if __name__ == "__main__":
+    data = get_quote_data('AAPL', '1Y', '1m')
+    print(type(data.index[0].date().strftime('%Y_%m_%d')))
+    print(data.index[-1].date())
+    data = get_close_price(data)
+    save_csv(data, 'AAPL')
