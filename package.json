@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "algolia-react-autocomplete": "^1.0.5",
     "algoliasearch": "^3.30.0",
     "autocomplete.js": "^0.31.0",
     "onedb-client": "^0.1.2",
     "react": "^16.6.0",
+    "react-algoliasearch": "^2.1.3",
     "react-dom": "^16.6.0",
     "react-redux": "^5.1.0",
     "react-scripts": "2.1.1"

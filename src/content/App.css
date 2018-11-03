@@ -17,14 +17,6 @@
   background-color: transparent;
   color: #fff;
 }
-.search{
-  width: 200px;
-  border-radius: 1px;
-  padding: 10px;
-  border: none;
-  opacity: 0.8;
-  margin: 5px;
-}
 .navTab {
   flex: 1;
   background-color: transparent;
@@ -115,3 +107,42 @@
 }
 .aboutContainer p, .aboutContainer h3, .aboutContainer h1 {
 }
+
+
+.search{
+  width: 200px;
+  border-radius: 1px;
+  padding: 10px;
+  border: none;
+  opacity: 0.8;
+  margin: 5px;
+}
+.algolia-autocomplete {
+  width: 100%;
+  opacity: 0.8;
+}
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 200px;
+  min-height: 30px;
+  text-indent: 10px;
+  border-radius: 1px;
+  border: none;
+  opacity: 0.8;
+  
+  margin: 5px;
+}
+.aa-dropdown-menu {
+  background-color: transparent;
+  border: 1px solid rgba(228, 228, 228, 0.6);
+  min-width: 100px;
+  margin-top: 10px;
+  box-sizing: border-box; }
+.aa-suggestion {
+  padding: 12px;
+  cursor: pointer;
+}
+.aa-suggestion + .aa-suggestion {
+    border-top: 1px solid rgba(228, 228, 228, 0.6);
+}
+  .aa-suggestion:hover, .aa-suggestion.aa-cursor {
+    background-color: rgba(241, 241, 241, 0.35); }

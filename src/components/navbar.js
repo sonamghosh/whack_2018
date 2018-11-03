@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import AgAutocomplete from 'react-algoliasearch';
 import musicBoi from '../images/musicBoiLogo2.png';
 
 class Navbar extends Component {
@@ -10,14 +10,17 @@ class Navbar extends Component {
           <p>Stock FindAR</p>
         </a>
         <div>
-          <form>
-            <input
-              type="text"
-              placeholder="Search..."
-              className="search"
-            />
-          </form>
-        </div>
+          <AgAutocomplete
+            apiKey={"6dc685dc57968d5a67e816916887382c"}
+            appId={"F7HFR1MH0G"}
+            displayKey="name"
+            indices={[{index: 'stocks'}]}
+            inputId="input-search"
+            placeholder="Search Stocks..."
+            keyName="stock"
+            options={{autoselectOnBlur: true, hint: true, debug: false, autoselect: true, tabAutocomplete: true}}
+          />
+      </div>
         {
           this.props.loggedOn &&
           <div className="navTab">
