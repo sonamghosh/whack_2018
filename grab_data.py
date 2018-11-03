@@ -143,6 +143,14 @@ def create_dataset(source='iex'):
             df = pd.read_csv(file, index_col=None, header=0)
             lst.append(df)
         dframe = pd.concat(lst, join='inner', axis=1)
+        # Get rid of Unnamed: 0 col
+        dframe = dframe.drop(dframe.columns[dframe.columns.str.contains('Unnamed',case = False)],axis = 1)
+        #Alphabetical Order Col names
+        dframe = dframe.reindex(sorted(dframe.columns), axis=1)
+        # Get rid of count
+        dframe.set_index('AAL', inplace=True)
+        # Use forward value for Nans
+        dframe = dframe.fillna(method='bfill')
         #dframe.set_index('AAL', inplace=True)
         path_2 = './data/'
         dframe.to_csv(path_2 + 'iex_nasdaq100_dataset.csv')
@@ -158,11 +166,12 @@ def create_dataset(source='iex'):
 if __name__ == "__main__":
     start = time.time()
     #grab_from_iex('aal', start='2018-10-02', end='2018-11-02')
-    
+    """
     ticks = grab_tickers(filename='stock_name.txt')
     for tick in ticks:
         print('Starting this stock: ', tick)
         grab_from_iex(tick, start='2018-10-02', end='2018-11-02')
+    """
     
     create_dataset(source='iex')
 
