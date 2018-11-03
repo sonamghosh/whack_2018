@@ -63,6 +63,8 @@ def grab_tickers(filename='stock_name.txt'):
 
 def save_csv(dataset, symbol):
     directory = './data/sub_data'
+    if symbol == '^NDX':
+        symbol = 'NDX'
     # Create sub directory to save individual csvs
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -85,7 +87,8 @@ def create_dataset():
         df = pd.read_csv(file, index_col=None, header=0)
         lst.append(df)
     #dframe = pd.merge(lst[0], lst[1])
-    dframe = pd.concat([lst[0], lst[1]], join='inner',axis=1).drop(['Datetime'], axis=1)
+    dframe = pd.concat(lst, join='inner',axis=1).drop(['Datetime'], axis=1)
+    dframe.set_index('AAL', inplace=True)
     print(dframe)
     path_2 = './data/'
     dframe.to_csv(path_2 + 'full_nasdaq100_dataset.csv')
@@ -96,6 +99,7 @@ def create_dataset():
 #d = get_close_price(data)
 #print(d)
 if __name__ == "__main__":
+    """
     data = get_quote_data('AAPL', '1y', '1h')
     print(type(data.index[0].date().strftime('%Y_%m_%d')))
     print(data.index[-1].date())
@@ -109,3 +113,17 @@ if __name__ == "__main__":
     import numpy as np
     #print(pd.merge(data, d2))
     create_dataset()
+    """
+
+    
+    ticks = grab_tickers(filename='stock_name.txt')
+    for tick in ticks:
+        print('Starting this stock: ', tick)
+        data = get_quote_data(tick, '1y', '1h')
+        data = get_close_price(data)
+        save_csv(data, tick)
+    create_dataset()
+    
+    #data = get_quote_data('^NDX', '1y', '30m')
+    #print(data)
+    #print(data.shape)
