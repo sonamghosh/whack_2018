@@ -24,32 +24,35 @@ class Navbar extends Component {
           </form>
         </div>
         <div className="navTab">
-          <a onClick={this.props.changeStockFindAR}>
+          <a onClick={this.props.changeStockFindAR} className="navLink">
             <p> Stock FindAR </p>
           </a>
         </div>
         <div className="navTab">
-          <a onClick={this.props.changeUseCases}>
+          <a onClick={this.props.changeUseCases} className="navLink">
             <p> Use Cases </p>
           </a>
         </div>
         <div className="navTab">
-          <a onClick={this.props.changeResources}>
+          <a onClick={this.props.changeResources} className="navLink">
             <p> Resources </p>
           </a>
         </div>
         <div className="navTab">
-          <a onClick={this.props.changeAbout}>
+          <a onClick={this.props.changeAbout} className="navLink">
             <p> About </p>
           </a>
         </div>
-        <div className="loginContainer">
-          <form>
-            <input type="text" name="username" placeholder="username" className="username"/>
-            <input type="password" name="password" placeholder="password" className="password"/>
-            <input type="submit" value="Submit" className="submit"/>
-          </form>
-        </div>
+        {
+          !this.props.loggedOn &&
+          <div className="loginContainer">
+            <form>
+              <input type="text" name="username" placeholder="username" className="username"/>
+              <input type="password" name="password" placeholder="password" className="password"/>
+              <input type="submit" value="Submit" className="submit"/>
+            </form>
+          </div>
+        }
       </div>
     );
   }

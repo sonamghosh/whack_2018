@@ -12,6 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       view: "main",
+      loggedOn: false,
     }
   }
 
@@ -27,6 +28,7 @@ class App extends Component {
           changeUseCases={() => this.changeTab("useCases")}
           changeResources={() => this.changeTab("resources")}
           changeAbout={() => this.changeTab("about")}
+          loggedOn={this.state.loggedOn}
         />
         <header className="App-header">
 
