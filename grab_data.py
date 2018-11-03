@@ -147,11 +147,14 @@ def create_dataset(source='iex'):
         dframe = dframe.drop(dframe.columns[dframe.columns.str.contains('Unnamed',case = False)],axis = 1)
         #Alphabetical Order Col names
         dframe = dframe.reindex(sorted(dframe.columns), axis=1)
+        # get rid of more Nans
+        dframe.fillna(method='ffill', inplace=True)
         # Get rid of count
         dframe.set_index('AAL', inplace=True)
         # Use forward value for Nans
         dframe = dframe.fillna(method='bfill')
         #dframe.set_index('AAL', inplace=True)
+        dframe = dframe.apply(pd.to_numeric, errors='coerce')
         path_2 = './data/'
         dframe.to_csv(path_2 + 'iex_nasdaq100_dataset.csv')
     else:
