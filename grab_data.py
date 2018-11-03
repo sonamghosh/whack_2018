@@ -77,6 +77,38 @@ def save_csv(dataset, symbol):
     dataset.to_csv(directory + '/' + filename)
 
 
+
+def grab_from_iex(symbol, start, end):
+    # Create range of dates of only week days (holidays not supported)
+    dates = pd.date_range(start=start, end=end, freq='B')
+    # Convert to strings
+    t = [i.strftime('%Y%m%d') for i in dates]
+    # empty list to put dataframes in
+    dfs = []
+    # Make HTTPS request
+    for i in t:
+        print(i)
+        res = requests.get('https://api.iextrading.com/1.0/stock/'+symbol+'/chart/date/'+i)
+        req_data = res.json()
+        # Error Checker for nulls
+        if req_data == []:
+            raise ValueError('The following stock has no data on IEX: ', symbol)
+        df = pd.DataFrame(req_data)
+        df = df[['close']]
+        df = df.rename(columns={'close':symbol.upper()})
+        #print(df.shape)
+        dfs.append(df)
+    #print(dfs)
+    # Concat into one dataframe
+    tot_df = pd.concat(dfs, axis=0)
+    print(tot_df)
+
+    directory = './data/sub_data'
+
+
+
+
+
 def create_dataset():
     print('Hello World')
     path = './data/sub_data'
@@ -99,6 +131,7 @@ def create_dataset():
 #d = get_close_price(data)
 #print(d)
 if __name__ == "__main__":
+    grab_from_iex('aal', start='2018-10-02', end='2018-11-02')
     """
     data = get_quote_data('AAPL', '1y', '1h')
     print(type(data.index[0].date().strftime('%Y_%m_%d')))
@@ -115,7 +148,7 @@ if __name__ == "__main__":
     create_dataset()
     """
 
-    
+    """
     ticks = grab_tickers(filename='stock_name.txt')
     for tick in ticks:
         print('Starting this stock: ', tick)
@@ -123,6 +156,7 @@ if __name__ == "__main__":
         data = get_close_price(data)
         save_csv(data, tick)
     create_dataset()
+    """
     
     #data = get_quote_data('^NDX', '1y', '30m')
     #print(data)
