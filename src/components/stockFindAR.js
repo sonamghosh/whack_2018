@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import {Chart, Lines} from 'orama';
 
-const data = [
-  {date: new Date('2010-01-01'), value: 10},
-  {date: new Date('2010-02-01'), value: 17},
-  {date: new Date('2010-03-01'), value: 9},
-  {date: new Date('2010-04-01'), value: 12},
-  {date: new Date('2010-05-01'), value: 20},
-]
-
 class StockFindAR extends Component {
   // Constructor to set initial states
   constructor(props){
@@ -16,24 +8,31 @@ class StockFindAR extends Component {
     this.state = {
       symbol: "",
       range: "",
+      data: [
+        {date: 0, high: 0},
+      ],
     };
     this.handleChangeSymbol = this.handleChangeSymbol.bind(this);
     this.handleChangeRange = this.handleChangeRange.bind(this);
   };
 
   getStock = () => {
-    fetch('https://localhost:5000/getStock', {
+    let symbol = this.state.symbol;
+    let range = this.state.range;
+    console.log(symbol + range)
+    fetch('http://localhost:5000/getStock', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/multipart-form',
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: JSON.stringify({
-        symbol: this.state.symbol,
-        range: this.state.range,
-      })
+      body: '&symbol='+symbol+'&range='+range
     })
+      .then(res => res.json())
+      .then((resp) => {
+        this.setState({data: resp});
+      })
   }
+
 
   handleChangeSymbol(event){
     this.setState({symbol: event.target.value});
@@ -45,16 +44,27 @@ class StockFindAR extends Component {
   render() {
     return(
       <div className="stockFindAR">
-        <h1>Your Discovered Stocks</h1>
-        <div className="chart">
-          <Chart>
-            <Lines data={data} x="date" y="value" />
-          </Chart>
-          <form onSubmit={(e) => {this.getStock(); e.preventDefault();}}>
-            <input type="text" name="symbol" placeholder="symbol" className="symbol" onChange={this.handleChangeSymbol}/>
-            <input type="text" name="range" placeholder="range" className="range" onChange={this.handleChangeRange}/>
-            <input type="submit" value="Get Info" className="submit" />
-          </form>
+        <div className="stockFindARContainer">
+          <h1>Discover Stock Information</h1>
+          <div className="chart">
+            <Chart>
+              <Lines data={this.state.data} x="date" y="high" />
+            </Chart>
+            <form onSubmit={(e) => {this.getStock(); e.preventDefault();}}>
+              <input type="text" name="symbol" placeholder="Symbol" className="symbol" onChange={this.handleChangeSymbol}/>
+              <select onChange={this.handleChangeRange} className="range">
+                <option value="1d">One day</option>
+                <option value="1m">One month</option>
+                <option selected value="3m">Three months</option>
+                <option value="6m">Six months</option>
+                <option value="ytd">Year-to-date</option>
+                <option value="1y">One year</option>
+                <option value="2y">Two years</option>
+                <option value="5y">Five years</option>
+              </select>
+              <input type="submit" value="Get Info" className="submitStock" />
+            </form>
+          </div>
         </div>
       </div>
     );

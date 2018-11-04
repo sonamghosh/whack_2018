@@ -84,7 +84,7 @@
   padding: 50px;
   color: #fff;
 }
-.predictionContainer {
+.predictionContainer, .stockFindARContainer {
   background-color:rgba(192,192,192,0.7);
   border-radius: 1px;
   width: 100%;
@@ -174,4 +174,33 @@
 .chart {
   width: 60%;
   margin: auto;
+}
+.symbol {
+  width: 150px;
+  border-radius: 1px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  opacity: 0.8;
+}
+.range {
+  width: 150px;
+  border-radius: 1px;
+  padding: 9px;
+  margin: 5px;
+  border: none;
+  opacity: 0.8;
+}
+.submitStock {
+  padding: 9px;
+  border-radius: 1px;
+  border: 1px solid #fff;
+  background-color: #3a8ced;
+  color: #fff;
+  margin-left: 5px;
+}
+.submitStock:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: #3a8ced;
 }

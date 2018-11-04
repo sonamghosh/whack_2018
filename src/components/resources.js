@@ -17,13 +17,13 @@ class Resources extends Component {
             <p>Python3</p>
             <p>Flask</p>
             <p>Viro React</p>
-            <p>OneDB Database</p>
+            <p>Orama</p>
             <p>PyTorch</p>
             <p>Google Cloud Platform</p>
           <br/>
           <br/>
           <h4>APIs:</h4>
-            <p>Yahoo Finance API</p>
+            <p>IEX API</p>
             <p>WayFair API</p>
             <p>Algolia API</p>
             <p>Authorize.net API</p>
