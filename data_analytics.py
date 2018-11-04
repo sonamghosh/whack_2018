@@ -44,7 +44,9 @@ def plot_and_save_plot(ticker, source):
 
 if __name__ == "__main__":
     tickers = ['TSLA', 'MSFT', 'AAPL', 'GOOG', 'NFLX', 'TRIP', 'AMZN', 'FTQGX']
-    plot_and_save_plot('FTQGX', 'yahoo')
+    for ticker in tickers:
+        plot_and_save_plot(ticker, 'yahoo')
+    #plot_and_save_plot('FTQGX', 'yahoo')
     #fmri = sns.load_dataset("fmri")
     #print(fmri)
     #ax = sns.lineplot(x="timepoint", y="signal", data=fmri)
