@@ -18,6 +18,14 @@ from pandas_datareader import data
 
 from matplotlib.dates import DateFormatter, WeekdayLocator, DayLocator, MONDAY
 import seaborn as sns 
+
+import csv
+from datetime import datetime
+import requests
+import sys
+
+import pyEX as p
+
 sns.set(style="darkgrid")
 
 
@@ -39,13 +47,132 @@ def plot_and_save_plot(ticker, source):
         plt.savefig(ticker+'_graph.png')
         plt.show()
 
+def get_analyst_rec(ticker):
+    get_date = lambda : datetime.utcnow().strftime('%d-%m-%Y')
+    lhs_url = 'https://query2.finance.yahoo.com/v10/finance/quoteSummary/'
+    rhs_url = '?formatted=true&crumb=swg7qs5y9UP&lang=en-US&region=US&' \
+              'modules=upgradeDowngradeHistory,recommendationTrend,' \
+              'financialData,earningsHistory,earningsTrend,industryTrend&' \
+              'corsDomain=finance.yahoo.com'
+    url = lhs_url + ticker + rhs_url
+    r = requests.get(url)
+    if not r.ok:
+        return -1
+
+    result = r.json()['quoteSummary']['result'][0]
+    yahoo_industry_analyst_rec = result['financialData']['recommendationMean']['fmt']
+
+    return yahoo_industry_analyst_rec
+
+def get_sector_perf(sector=None):
+    if sector == None:
+        d = pd.DataFrame(p.sectorPerformanceDF())
+        return d
+    d = pd.DataFrame(p.sectorPerformanceDF())
+    lst_of_industries = ['Consumer Discretionary', 'Financials', 'Industrials', 'Materials',
+                         'Energy', 'Consumer Staples', 'Utilities', 'Health Care',
+                         'Real Estate', 'Communication Services', 'Technology']
+    idx = d.index[d['name'] == sector].tolist()
+    idx = idx[0]
+    perf = d['performance'][idx]
+
+    return perf
+
+def eps_stats(ticker):
+    get_date = lambda : datetime.utcnow().strftime('%d-%m-%Y')
+    lhs_url = 'https://query2.finance.yahoo.com/v10/finance/quoteSummary/'
+    rhs_url = '?formatted=true&crumb=swg7qs5y9UP&lang=en-US&region=US&' \
+              'modules=upgradeDowngradeHistory,recommendationTrend,' \
+              'financialData,earningsHistory,earningsTrend,industryTrend&' \
+              'corsDomain=finance.yahoo.com'
+    url = lhs_url + ticker + rhs_url
+    r = requests.get(url)
+    if not r.ok:
+        return -1
+    result = r.json()['quoteSummary']['result'][0]
+    eps_surprise_start = result['earningsHistory']['history'][0]['surprisePercent']['raw']
+    eps_surprise_end = result['earningsHistory']['history'][3]['surprisePercent']['raw']
+    print(eps_surprise_start)
+    print(eps_surprise_end)
+    print('percent change: ', (eps_surprise_end - eps_surprise_start) / eps_surprise_end ) 
+    #print(len(eps_surprise_start))
+    perc_change = (eps_surprise_end - eps_surprise_start) / eps_surprise_end 
+    return perc_change, eps_surprise_end
+
+def metric(analy_rec, eps_qtr_change, eps_surprise_end):
+    if 1 <= analy_rec <= 2 and eps_qtr_change >= 0.25:
+        output = 'Strong Buy'
+    elif 1 <== analy_rec <= 2 and -0.75 <= eps_qtr_change < 0.25:
+        output = 'Buy'
+    elif 1 <= analy_rec <= 2 and -1 <= eps_qtr_change < -0.75:
+        output = 'Hold'
+    elif 2 < analy_rec <= 3 and eps_qtr_change >= 0.75:
+        output = 'Strong Buy'
+    elif 2 < analy_rec <= 3 and 0.5 <= eps_qtr_change < 0.75:
+        output = 'Buy'
+    elif 2 < analy_rec <= 3 and 0 <= eps_qtr_change < 0.5:
+        output = 'Hold'
+    elif 2 < analy_rec <=3 and eps_qtr_change < 0:
+        output = 'Underperforming'
+    elif 3 < analy_rec <= 4 and eps_qtr_change >= 0.75:
+        output = 'Buy'
+    elif 3 < analy_rec <= 4 and 0.25 <= eps_qtr_change < 0.75:
+        output = 'Underperforming'
+    elif 3 < analy_rec <= 4 and eps_qtr_change < 0.25:
+        output = 'Sell'
+    elif 4 < analy_rec <= 5 and eps_qtr_change >= 0.75:
+        output = 'Hold'
+    elif 4 < analy_rec <= 5 and 0.5 <= eps_qtr_change < 0.75:
+        output = 'Underperforming'
+    elif 4 < analy_rec <= 5 and eps_qtr_change < 0.5:
+        output = 'sell'
+    else:
+        print('Not Available')
+
+    if round(analy_rec) == 1:
+        fin_outcome = 'Strong Buy'
+    elif round(analy_rec) == 2:
+        fin_outcome = 'Buy'
+    elif round(analy_rec) == 3:
+        fin_outcome = 'Hold'
+    elif round(analy_rec) == 4:
+        fin_outcome = 'Underperforming'
+    elif round(analy_rec) == 5:
+        fin_outcome = 'Sell'
+    else:
+        print('Invalid')
+
+    dict_vals = {'Finance Analyst Rating: ': analy_rec,
+            'EPS Surprise Change between 4th and 1st Qtr ': eps_qtr_change * 100,
+            'EPS Surprise (Current Qtr)': eps_surprise_end,
+            'Finance Analyst Rating Metric': fin_outcome,
+            'Personal Metric Outcome': output
+            }
+
+    return dict_vals
+    
+
+
+
+
+
+def trade_volume_plot(ticker, source):
+    if source == 'yahoo':
+        d = get_quote_data(ticker, '1y', '1d')
+        d.index = d.index.normalize()
+        d = d[['VOLUME']]
+
+
 
 
 
 if __name__ == "__main__":
     tickers = ['TSLA', 'MSFT', 'AAPL', 'GOOG', 'NFLX', 'TRIP', 'AMZN', 'FTQGX']
+    """
     for ticker in tickers:
         plot_and_save_plot(ticker, 'yahoo')
+    """
+    eps_stats('AAPL')
     #plot_and_save_plot('FTQGX', 'yahoo')
     #fmri = sns.load_dataset("fmri")
     #print(fmri)
