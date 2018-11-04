@@ -52,7 +52,14 @@ var ARCarDemo = createReactClass({
             <ViroText text="Tesla" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#42f4bc"/>
             <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
             <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .30, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
-
+            <ViroVideo
+              source={require('./res/teslavideo.mp4')}
+              loop={true}
+              position={[.35, .25, 0]}
+              rotation = {[0,-40,0]}
+              scale={[.25, .25, 0]}
+           />
+           <ViroText text="Media" scale={[.30, .30, .30]} position={[.45, .30, 0]} rotation = {[0,-40,0]} extrusionDepth={3} color = "lightblue"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -88,7 +95,7 @@ var ARCarDemo = createReactClass({
             <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
             <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={3} color = "#42f492"/>
             <ViroVideo
-              source={require('./res/teslavideo.mp4')}
+              source={require('./res/fidelityvideo.mp4')}
               loop={true}
               position={[.35, .25, 0]}
               rotation = {[0,-40,0]}
@@ -129,6 +136,14 @@ var ARCarDemo = createReactClass({
             <ViroText text="Microsoft" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#173b7a"/>
             <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
             <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
+            <ViroVideo
+              source={require('./res/microsoftvideo.mp4')}
+              loop={true}
+              position={[.35, .25, 0]}
+              rotation = {[0,-40,0]}
+              scale={[.25, .25, 0]}
+           />
+           <ViroText text="Media" scale={[.30, .30, .30]} position={[.45, .30, 0]} rotation = {[0,-40,0]} extrusionDepth={3} color = "lightblue"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -163,6 +178,14 @@ var ARCarDemo = createReactClass({
             <ViroText text="Apple" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
             <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
             <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
+            <ViroVideo
+              source={require('./res/applevideo.mp4')}
+              loop={true}
+              position={[.35, .25, 0]}
+              rotation = {[0,-40,0]}
+              scale={[.25, .25, 0]}
+           />
+           <ViroText text="Media" scale={[.30, .30, .30]} position={[.45, .30, 0]} rotation = {[0,-40,0]} extrusionDepth={3} color = "lightblue"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -299,6 +322,14 @@ var ARCarDemo = createReactClass({
             <ViroText text="Amazon" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
             <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
             <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
+            <ViroVideo
+              source={require('./res/amazonvideo.mp4')}
+              loop={true}
+              position={[.35, .25, 0]}
+              rotation = {[0,-40,0]}
+              scale={[.25, .25, 0]}
+           />
+           <ViroText text="Media" scale={[.30, .30, .30]} position={[.45, .30, 0]} rotation = {[0,-40,0]} extrusionDepth={3} color = "lightblue"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
