@@ -18,6 +18,9 @@ import {
   ViroQuad,
   ViroBox,
   ViroText,
+  ViroVideo,
+  ViroAnimatedImage,
+  ViroParticleEmitter
 } from 'react-viro';
 
 var createReactClass = require('create-react-class');
@@ -42,11 +45,13 @@ var ARCarDemo = createReactClass({
       <ViroARScene>
         <ViroLightingEnvironment source={require('./res/tesla/garage_1k.hdr')}/>
       {/*<ViroText text="Stock FindAR!" scale={[.5, .5, .5]} position={[0, .3, -.5]} extrusionDepth={10} color = "#42f4bc"/>*/}
-        <ViroBox position={[0, .6, -5]} scale={[7, 7, 7]} materials={["TeamLogo"]} />
+        <ViroBox position={[0, .6, -2]} scale={[1, 1, 1]} materials={["TeamLogo"]} />
         <ViroARImageMarker target={"logo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
             <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["tsla"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Tesla" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#42f4bc"/>
+            <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
+            <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .30, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
 
           </ViroNode>
           <Viro3DObject
@@ -79,7 +84,17 @@ var ARCarDemo = createReactClass({
         <ViroARImageMarker target={"fidelitylogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
             <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["ftqgx"]} animation={{name: "rotate", run: true, loop: true}} />
-            <ViroText text="Fidelity" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#267a17" />
+            <ViroText text="Fidelity" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={3} color = "#267a17" />
+            <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
+            <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={3} color = "#42f492"/>
+            <ViroVideo
+              source={require('./res/teslavideo.mp4')}
+              loop={true}
+              position={[.35, .25, 0]}
+              rotation = {[0,-40,0]}
+              scale={[.25, .25, 0]}
+           />
+           <ViroText text="Media" scale={[.30, .30, .30]} position={[.45, .30, 0]} rotation = {[0,-40,0]} extrusionDepth={3} color = "lightblue"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -112,6 +127,8 @@ var ARCarDemo = createReactClass({
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
             <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["msft"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Microsoft" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#173b7a"/>
+            <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
+            <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -144,6 +161,8 @@ var ARCarDemo = createReactClass({
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
             <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["aapl"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Apple" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
+            <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
+            <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -176,6 +195,8 @@ var ARCarDemo = createReactClass({
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
             <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["goog"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Google" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
+            <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
+            <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -208,6 +229,8 @@ var ARCarDemo = createReactClass({
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
             <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["nflx"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Netflix" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#ce2323" />
+            <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
+            <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -240,6 +263,8 @@ var ARCarDemo = createReactClass({
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
             <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["trip"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Trip Advisor" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
+            <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
+            <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -272,6 +297,8 @@ var ARCarDemo = createReactClass({
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
             <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["amzn"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Amazon" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
+            <ViroBox position={[-.35, .25, 0]} scale={[.1, .1, .1]} materials={["robinhood"]} animation={{name: "nrotate", run: true, loop: true}} />
+            <ViroText text="Buy & Sell" scale={[.30, .30, .30]} position={[-.30, .27, 0]} rotation = {[0,40,0]} extrusionDepth={10} color = "#42f492"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -444,6 +471,9 @@ ViroMaterials.createMaterials({
   },
   TeamLogo: {
     diffuseTexture: require('./res/stockfindar_logo.png')
+  },
+  robinhood: {
+    diffuseTexture: require('./res/robinhood.jpg')
   }
 });
 
@@ -513,7 +543,14 @@ ViroAnimations.registerAnimations({
       rotateY: "+=90",
       rotateX: "+=0"
     },
-    duration: 5000, //Rotate Slowly
+    duration: 7500, //Rotate Slowly
+  },
+  nrotate: {
+    properties: {
+      rotateY: "-=90",
+      rotateX: "-=0"
+    },
+    duration: 4500, //Rotate Faster opposite
   },
 
 });
