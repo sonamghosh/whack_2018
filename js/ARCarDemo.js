@@ -113,7 +113,7 @@ var ARCarDemo = createReactClass({
 
         <ViroARImageMarker target={"fidelitylogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.3, .3, .1]} materials={["grid"]} />
+            <ViroBox position={[0, .25, 0]} scale={[.3, .3, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Fidelity" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
           </ViroNode>
           <Viro3DObject
@@ -252,10 +252,10 @@ ViroMaterials.createMaterials({
     diffuseColor: "rgb(200,142,31)",
   },
   grid: {
-    diffuseTexture: require('./res/icon.png'),
+    diffuseTexture: require('./res/stock.jpg'),
   },
   graph: {
-    diffuseTexture: require('./res/gift-of-stocks.jpg')
+    diffuseTexture: require('./res/stock.jpg')
   },
 });
 
@@ -284,6 +284,18 @@ ViroAnimations.registerAnimations({
     scaleSphereDown:{properties:{scaleX:1, scaleY:1, scaleZ:1,},
                   duration: 50, easing: "easeineaseout"},
     tapAnimation:[["scaleSphereUp", "scaleSphereDown"],]
+});
+
+//Rotation
+ViroAnimations.registerAnimations({
+  rotate: {
+    properties: {
+      rotateY: "+=90",
+      rotateX: "+=0"
+    },
+    duration: 2500, //Rotate Slowly
+  },
+
 });
 
 module.exports = ARCarDemo;
