@@ -42,11 +42,12 @@ var ARCarDemo = createReactClass({
       <ViroARScene>
         <ViroLightingEnvironment source={require('./res/tesla/garage_1k.hdr')}/>
       {/*<ViroText text="Stock FindAR!" scale={[.5, .5, .5]} position={[0, .3, -.5]} extrusionDepth={10} color = "#42f4bc"/>*/}
-        <ViroBox position={[0, .6, -1.5]} scale={[.7, .7, .7]} materials={["TeamLogo"]} />
+        <ViroBox position={[0, .6, -5]} scale={[7, 7, 7]} materials={["TeamLogo"]} />
         <ViroARImageMarker target={"logo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["tsla"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["tsla"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Tesla" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#42f4bc"/>
+
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -77,8 +78,8 @@ var ARCarDemo = createReactClass({
 
         <ViroARImageMarker target={"fidelitylogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["ftqgx"]} animation={{name: "rotate", run: true, loop: true}} />
-            <ViroText text="Fidelity" scale={[.3, .3, .2]} position={[0, .3, 0]} extrusionDepth={10} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["ftqgx"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Fidelity" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#267a17" />
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -109,8 +110,8 @@ var ARCarDemo = createReactClass({
 
         <ViroARImageMarker target={"microsoftlogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["msft"]} animation={{name: "rotate", run: true, loop: true}} />
-            <ViroText text="Microsoft" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["msft"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Microsoft" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#173b7a"/>
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -141,8 +142,8 @@ var ARCarDemo = createReactClass({
 
         <ViroARImageMarker target={"applelogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["aapl"]} animation={{name: "rotate", run: true, loop: true}} />
-            <ViroText text="Apple" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["aapl"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Apple" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -173,8 +174,8 @@ var ARCarDemo = createReactClass({
 
         <ViroARImageMarker target={"googlelogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["goog"]} animation={{name: "rotate", run: true, loop: true}} />
-            <ViroText text="Google" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["goog"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Google" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -205,8 +206,8 @@ var ARCarDemo = createReactClass({
 
         <ViroARImageMarker target={"netflixlogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["nflx"]} animation={{name: "rotate", run: true, loop: true}} />
-            <ViroText text="Netflix" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["nflx"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Netflix" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} color = "#ce2323" />
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -237,8 +238,8 @@ var ARCarDemo = createReactClass({
 
         <ViroARImageMarker target={"tripadvisorlogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["trip"]} animation={{name: "rotate", run: true, loop: true}} />
-            <ViroText text="Trip Advisor" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["trip"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Trip Advisor" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
@@ -269,8 +270,8 @@ var ARCarDemo = createReactClass({
 
         <ViroARImageMarker target={"amazonlogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["amzn"]} animation={{name: "rotate", run: true, loop: true}} />
-            <ViroText text="Amazon" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .2]} materials={["amzn"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Amazon" scale={[.3, .3, .2]} position={[.1, .30, 0]} extrusionDepth={10} />
           </ViroNode>
           <Viro3DObject
             scale={[0, 0, 0]}
