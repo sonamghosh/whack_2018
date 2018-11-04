@@ -142,11 +142,11 @@ def metric(analy_rec, eps_qtr_change, eps_surprise_end):
     else:
         print('Invalid')
 
-    dict_vals = {'Finance Analyst Rating: ': analy_rec,
-            'EPS Surprise Change between 4th and 1st Qtr ': eps_qtr_change * 100,
-            'EPS Surprise (Current Qtr)': eps_surprise_end,
-            'Finance Analyst Rating Metric': fin_outcome,
-            'Personal Metric Outcome': output
+    dict_vals = {'FAR': analy_rec,
+            'EPSSurpriseChange': eps_qtr_change,
+            'EPSSurpriseCurrent': eps_surprise_end,
+            'FARM': fin_outcome,
+            'PMO': output
             }
 
     return dict_vals
@@ -162,6 +162,13 @@ def trade_volume_plot(ticker, source):
         d.index = d.index.normalize()
         d = d[['VOLUME']]
 
+        print(d)
+        #volume_by_assets = d.sum()
+        #print(volume_by_assets)
+        #highestVolume = d.loc[d['VOLUME'].idxmax()]
+        #print(highestVolume['VOLUME'])
+        #print(highestVolume['VOLUME'] / volume_by_assets)
+
 
 
 
@@ -172,11 +179,13 @@ if __name__ == "__main__":
     for ticker in tickers:
         plot_and_save_plot(ticker, 'yahoo')
     """
-    a, b= eps_stats('AAPL')
-    c = get_analyst_rec('AAPL')
+    trade_volume_plot('aapl', 'yahoo')
+
+    #a, b= eps_stats('AAPL')
+    #c = get_analyst_rec('AAPL')
     #print(type(a), type(b), type(c))
-    d = metric(c, a, b)
-    print(d)
+    #d = metric(c, a, b)
+    #print(d)
     #plot_and_save_plot('FTQGX', 'yahoo')
     #fmri = sns.load_dataset("fmri")
     #print(fmri)
