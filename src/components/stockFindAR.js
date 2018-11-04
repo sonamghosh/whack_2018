@@ -16,6 +16,7 @@ class StockFindAR extends Component {
     this.handleChangeRange = this.handleChangeRange.bind(this);
   };
 
+  // HTTP POST to Serveo server to get the stock info back for symbol and date range
   getStock = () => {
     let symbol = this.state.symbol;
     let range = this.state.range;
@@ -33,7 +34,7 @@ class StockFindAR extends Component {
       })
   }
 
-
+  // Modify state on change of text/selection
   handleChangeSymbol(event){
     this.setState({symbol: event.target.value});
   }
@@ -41,6 +42,12 @@ class StockFindAR extends Component {
     this.setState({range: event.target.value});
   }
 
+  // Alert user about buying stock with Authorize.net
+  buyStock() {
+    alert("You bought a share through Authorize.net's sandbox payment!")
+  }
+
+  // Renders the JSX
   render() {
     return(
       <div className="stockFindAR">
@@ -63,6 +70,7 @@ class StockFindAR extends Component {
                 <option value="5y">Five years</option>
               </select>
               <input type="submit" value="Get Info" className="submitStock" />
+              <input type="submit" value="Buy" className="submitStock" onClick={this.buyStock}/>
             </form>
           </div>
         </div>

@@ -5,6 +5,20 @@
 .logo {
   flex: 1;
   object-fit: contain;
+  background-color: rgba(192,192,192,.8);
+  border: 1px solid rgba(192, 192, 192, .8);
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-right: 10px;
+  padding: 2px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.logo:hover {
+  cursor: pointer;
+  background-color: rgba(192, 192, 192, .2);
+  border: 1px solid rgba(192, 192, 192, .8);
 }
 .navbar {
   position: fixed;
@@ -140,7 +154,7 @@
 }
 .algolia-autocomplete {
   width: 100%;
-  opacity: 1;
+  opacity: .8;
   position: absolute;
 }
 .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
@@ -203,4 +217,13 @@
   cursor: pointer;
   background-color: #fff;
   color: #3a8ced;
+}
+
+
+.footer{
+  padding: 10px;
+  background-color: #666;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }

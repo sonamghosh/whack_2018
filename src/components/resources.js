@@ -24,7 +24,6 @@ class Resources extends Component {
           <br/>
           <h4>APIs:</h4>
             <p>IEX API</p>
-            <p>WayFair API</p>
             <p>Algolia API</p>
             <p>Authorize.net API</p>
 

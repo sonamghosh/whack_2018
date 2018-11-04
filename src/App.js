@@ -9,14 +9,7 @@ import Prediction from './components/prediction';
 import UseCases from './components/useCases';
 import Resources from './components/resources';
 import About from './components/about';
-
-const data = [
-  {date: new Date('2010-01-01'), value: 10},
-  {date: new Date('2010-02-01'), value: 17},
-  {date: new Date('2010-03-01'), value: 9},
-  {date: new Date('2010-04-01'), value: 12},
-  {date: new Date('2010-05-01'), value: 20},
-]
+import Footer from './components/footer';
 
 class App extends Component {
   // Constructor to set initial states
@@ -79,7 +72,7 @@ class App extends Component {
         </body>
 
         <footer>
-
+          <Footer />
         </footer>
       </div>
     );

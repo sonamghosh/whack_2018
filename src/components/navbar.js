@@ -1,31 +1,12 @@
 import React, { Component } from 'react';
 import AgAutocomplete from 'react-algoliasearch';
-import OneDBClient from 'onedb-client';
-
-var onedb = new OneDBClient.Client({
-  hosts: {
-    primary: {
-      location: 'https://one-db.datafire.io',
-    }
-  },
-  scope: ['status:read'],
-  onLogin: function(instance) {
-    if (instance === onedb.hosts.primary) {
-      if (instance.user) {
-        console.log("logged in as " + instance.user.$.id);
-      } else {
-        console.log("logged out");
-      }
-    }
-  }
-})
 
 class Navbar extends Component {
   render() {
     return(
       <div className="navbar">
         <a className="logo" onClick={this.props.changeHome}>
-          <p>Stock FindAR</p>
+          <img src={require('../images/stockfindar_straightlogo.png')} />
         </a>
         <div>
           <form>
@@ -77,7 +58,7 @@ class Navbar extends Component {
             <form onSubmit={this.props.login}>
               <input type="text" name="username" placeholder="username" className="username"/>
               <input type="password" name="password" placeholder="password" className="password"/>
-              <input type="submit" value="Submit" className="submit" />
+              <input type="submit" value="Login" className="submit"/>
             </form>
             <div id="LoginForm">
             </div>
