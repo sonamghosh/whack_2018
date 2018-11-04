@@ -19,6 +19,14 @@ from custom_types import DaRnnNet, TrainData, TrainConfig
 from utils import numpy_to_tvar
 from gpu_check import device
 
+import plotly
+plotly.tools.set_credentials_file(username='sonamghosh', api_key='PacsVoWuRF2Fe0hSFcwz')
+
+plotly.tools.set_config_file(world_readable=True, sharing='public')
+
+
+import plotly.plotly as py 
+import plotly.graph_objs as go 
 
 logger = utils.setup_log()
 logger.info(f"Using computation device: {device}")
@@ -181,6 +189,7 @@ def predict(t_net: DaRnnNet, t_dat: TrainData, train_size: int, batch_size: int,
 # Testing
 save_plots = True
 debug = False
+interactive_plot = True
 
 raw_data = pd.read_csv(os.path.join("data", "iex_nasdaq100_dataset.csv"), nrows=100 if debug else None)
 logger.info(f"Shape of data: {raw_data.shape}.\nMissing in data: {raw_data.isnull().sum().sum()}.")
@@ -190,7 +199,7 @@ data, scaler = preprocess_data(raw_data, targ_cols)
 
 da_rnn_kwargs = {"batch_size": 128, "T": 10}
 config, model = da_rnn(data, n_targs=len(targ_cols), learning_rate=.001, **da_rnn_kwargs)
-iter_loss, epoch_loss = train(model, data, config, n_epochs=50, save_plots=save_plots)
+iter_loss, epoch_loss = train(model, data, config, n_epochs=300, save_plots=save_plots)
 final_y_pred = predict(model, data, config.train_size, config.batch_size, config.T)
 
 plt.figure()
@@ -201,7 +210,22 @@ plt.figure()
 plt.plot(final_y_pred, label="Predicted")
 plt.plot(data.targs[config.train_size:], label="True")
 plt.legend(loc="upper left")
+#plt.show()
 utils.save_or_show_plot("final_predicted.png", save_plots)
+
+if interactive_plot == True:
+    pred_plot = go.Scatter(x = np.arange(0, len(final_y_pred)), 
+                           y = final_y_pred,
+                           name='Predicted',
+                           mode= 'lines+markers')
+    true_plot = go.Scatter(x = np.arange(0, len(data.targs[config.train_size:])),
+                           y = data.targs[config.train_size:],
+                           name='True',
+                           mode='lines+markers')
+    data = [pred_plot, true_plot]
+    py.iplot(data, filename='finalpredicted_04', auto_open=True)
+
+
 
 with open(os.path.join("data", "da_rnn_kwargs.json"), "w") as f:
     json.dump(da_rnn_kwargs, f, indent=4)
