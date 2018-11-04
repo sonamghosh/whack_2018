@@ -167,7 +167,8 @@ def create_dataset(source='iex'):
 #d = get_close_price(data)
 #print(d)
 if __name__ == "__main__":
-    start = time.time()
+
+    #start = time.time()
     #grab_from_iex('aal', start='2018-10-02', end='2018-11-02')
     """
     ticks = grab_tickers(filename='stock_name.txt')
@@ -176,14 +177,14 @@ if __name__ == "__main__":
         grab_from_iex(tick, start='2018-10-02', end='2018-11-02')
     """
     
-    create_dataset(source='iex')
+    #create_dataset(source='iex')
 
 
 
 
 
-    end = time.time()
-    print('Time Elapsed: ', end - start, ' s')
+    #end = time.time()
+    #print('Time Elapsed: ', end - start, ' s')
 
     """
     data = get_quote_data('AAPL', '1y', '1h')
