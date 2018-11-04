@@ -40,7 +40,11 @@
   text-shadow: none;
 }
 .loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   flex: 3;
+  flex-direction: row;
 }
 .username, .password{
   border-radius: 1px;
@@ -55,6 +59,7 @@
   border: 1px solid #fff;
   background-color: transparent;
   color: #fff;
+  margin-left: 5px;
 }
 
 
@@ -72,6 +77,22 @@
   padding: 50px;
   color: #fff;
 }
+.prediction {
+  background-image:url('../images/stockFindAR.jpeg');
+  background-size: 100% 100%;
+  min-height:100vh;
+  padding: 50px;
+  color: #fff;
+}
+.predictionContainer {
+  background-color:rgba(192,192,192,0.7);
+  border-radius: 1px;
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+  padding-bottom: 50px;
+  margin-top: 50px;
+}
 .useCases{
   background-image:url('../images/useCases.jpeg');
   background-size: 100% 100%;
@@ -79,7 +100,7 @@
   padding: 50px;
   color: #fff;
 }
-.useCasesContainer, .aboutContainer, .resourcesContainer{
+.useCasesContainer, .aboutContainer, .resourcesContainer, .headerContainer{
   background-color:rgba(192,192,192,0.9);
   border-radius: 1px;
   width: 50%;
@@ -114,12 +135,13 @@
   border-radius: 1px;
   padding: 10px;
   border: none;
-  opacity: 0.8;
+  opacity: 1;
   margin: 5px;
 }
 .algolia-autocomplete {
   width: 100%;
-  opacity: 0.8;
+  opacity: 1;
+  position: absolute;
 }
 .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
   width: 200px;
@@ -127,12 +149,12 @@
   text-indent: 10px;
   border-radius: 1px;
   border: none;
-  opacity: 0.8;
-  
+  opacity: 1;
+
   margin: 5px;
 }
 .aa-dropdown-menu {
-  background-color: transparent;
+  background-color:rgba(192,192,192,1);
   border: 1px solid rgba(228, 228, 228, 0.6);
   min-width: 100px;
   margin-top: 10px;
@@ -142,7 +164,14 @@
   cursor: pointer;
 }
 .aa-suggestion + .aa-suggestion {
-    border-top: 1px solid rgba(228, 228, 228, 0.6);
+    border-top: 1px solid rgba(228, 228, 228, 1);
 }
   .aa-suggestion:hover, .aa-suggestion.aa-cursor {
     background-color: rgba(241, 241, 241, 0.35); }
+
+
+
+.chart {
+  width: 60%;
+  margin: auto;
+}

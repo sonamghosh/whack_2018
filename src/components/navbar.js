@@ -1,6 +1,24 @@
 import React, { Component } from 'react';
 import AgAutocomplete from 'react-algoliasearch';
-import musicBoi from '../images/musicBoiLogo2.png';
+import OneDBClient from 'onedb-client';
+
+var onedb = new OneDBClient.Client({
+  hosts: {
+    primary: {
+      location: 'https://one-db.datafire.io',
+    }
+  },
+  scope: ['status:read'],
+  onLogin: function(instance) {
+    if (instance === onedb.hosts.primary) {
+      if (instance.user) {
+        console.log("logged in as " + instance.user.$.id);
+      } else {
+        console.log("logged out");
+      }
+    }
+  }
+})
 
 class Navbar extends Component {
   render() {
@@ -10,16 +28,20 @@ class Navbar extends Component {
           <p>Stock FindAR</p>
         </a>
         <div>
+          <form>
           <AgAutocomplete
             apiKey={"6dc685dc57968d5a67e816916887382c"}
             appId={"F7HFR1MH0G"}
-            displayKey="name"
+            displayKey="Company Name"
             indices={[{index: 'stocks'}]}
             inputId="input-search"
             placeholder="Search Stocks..."
-            keyName="stock"
-            options={{autoselectOnBlur: true, hint: true, debug: false, autoselect: true, tabAutocomplete: true}}
+            keyName="Company Name"
+            hitsPerPage="10"
+            selected={this.suggestionSelected}
+            options={{autoselectOnBlur: true, hint: true, debug: false}}
           />
+          </form>
       </div>
         {
           this.props.loggedOn &&
@@ -29,6 +51,11 @@ class Navbar extends Component {
             </a>
           </div>
         }
+        <div className="navTab">
+          <a onClick={this.props.changePrediction} className="navLink">
+            <p> Prediction (BETA) </p>
+          </a>
+        </div>
         <div className="navTab">
           <a onClick={this.props.changeUseCases} className="navLink">
             <p> Use Cases </p>
@@ -47,18 +74,23 @@ class Navbar extends Component {
         {
           !this.props.loggedOn &&
           <div className="loginContainer">
-            <form>
+            <form onSubmit={this.props.login}>
               <input type="text" name="username" placeholder="username" className="username"/>
               <input type="password" name="password" placeholder="password" className="password"/>
-              <input type="submit" value="Submit" className="submit"/>
+              <input type="submit" value="Submit" className="submit" />
             </form>
+            <div id="LoginForm">
+            </div>
           </div>
         }
         {
           this.props.loggedOn &&
-          <form>
-            <input type="submit" value="Submit" className="submit"/>
-          </form>
+          <div className="loginContainer">
+            <h3>Welcome Hacker!</h3>
+            <form onSubmit={this.props.logoff}>
+              <input type="submit" value="Log Off" className="submit"/>
+            </form>
+          </div>
         }
       </div>
     );

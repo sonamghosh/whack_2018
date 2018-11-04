@@ -6,8 +6,11 @@ class Header extends Component {
   render() {
     return(
       <div className="header">
-        <h1>Join Stock FindAR</h1>
-        <h3>View how our world is surrounded by stocks.</h3>
+        <div className="headerContainer">
+          <h1>Join Stock FindAR</h1>
+          <h3>Only 54% of Americans own stocks.</h3>
+          <h3>Let's increase that percentage by educating through everyday interactions.</h3>
+        </div>
       </div>
     );
   }
