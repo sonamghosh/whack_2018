@@ -20,7 +20,7 @@ class StockFindAR extends Component {
     let symbol = this.state.symbol;
     let range = this.state.range;
     console.log(symbol + range)
-    fetch('http://localhost:5000/getStock', {
+    fetch('https://stockfindar.serveo.net/getStock', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
