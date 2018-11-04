@@ -62,7 +62,7 @@ def get_analyst_rec(ticker):
     result = r.json()['quoteSummary']['result'][0]
     yahoo_industry_analyst_rec = result['financialData']['recommendationMean']['fmt']
 
-    return yahoo_industry_analyst_rec
+    return float(yahoo_industry_analyst_rec)
 
 def get_sector_perf(sector=None):
     if sector == None:
@@ -102,7 +102,7 @@ def eps_stats(ticker):
 def metric(analy_rec, eps_qtr_change, eps_surprise_end):
     if 1 <= analy_rec <= 2 and eps_qtr_change >= 0.25:
         output = 'Strong Buy'
-    elif 1 <== analy_rec <= 2 and -0.75 <= eps_qtr_change < 0.25:
+    elif 1 <= analy_rec <= 2 and -0.75 <= eps_qtr_change < 0.25:
         output = 'Buy'
     elif 1 <= analy_rec <= 2 and -1 <= eps_qtr_change < -0.75:
         output = 'Hold'
@@ -172,7 +172,11 @@ if __name__ == "__main__":
     for ticker in tickers:
         plot_and_save_plot(ticker, 'yahoo')
     """
-    eps_stats('AAPL')
+    a, b= eps_stats('AAPL')
+    c = get_analyst_rec('AAPL')
+    #print(type(a), type(b), type(c))
+    d = metric(c, a, b)
+    print(d)
     #plot_and_save_plot('FTQGX', 'yahoo')
     #fmri = sns.load_dataset("fmri")
     #print(fmri)
