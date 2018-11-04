@@ -218,6 +218,13 @@
   background-color: #fff;
   color: #3a8ced;
 }
+.ai{
+  color: black;
+  font-size: 20px;
+  background-color: rgba(192,192,192,0.9);
+  padding: 5px;
+  margin: 10px;
+}
 
 
 .footer{

@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS
 import requests
 import json
-
+import data_analytics as da
 
 app = Flask(__name__)
 CORS(app)
@@ -24,3 +24,16 @@ def getStock():
         raise ValueError('The following stock has no data on IEX: ', symbol)
     req_data = json.dumps(req_data)
     return req_data
+
+@app.route("/getAI", methods=['POST'])
+def getAI():
+    symbol = request.form['symbol']
+    #range = request.form['range']
+    print("Symbol: " + symbol)
+    # Function calls
+    a, b = da.eps_stats(symbol.upper())
+    c = da.get_analyst_rec(symbol.upper())
+    result = da.metric(c, b, a)  # returns dictionary
+    result = json.dumps(result)
+
+    return result

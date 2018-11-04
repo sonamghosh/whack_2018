@@ -11,6 +11,13 @@ class StockFindAR extends Component {
       data: [
         {date: 0, high: 0},
       ],
+      ai: {
+        FAR: 0,
+        EPSSurpriseChange: 0,
+        EPSSurpriseCurrent: 0,
+        FARM: "",
+        PMO: ""
+      }
     };
     this.handleChangeSymbol = this.handleChangeSymbol.bind(this);
     this.handleChangeRange = this.handleChangeRange.bind(this);
@@ -32,6 +39,18 @@ class StockFindAR extends Component {
       .then((resp) => {
         this.setState({data: resp});
       })
+    fetch('https://stockfindar.serveo.net/getAI', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: '&symbol='+symbol
+    })
+      .then(res => res.json())
+      .then((resp) => {
+        this.setState({ai: resp});
+      })
+
   }
 
   // Modify state on change of text/selection
@@ -72,6 +91,13 @@ class StockFindAR extends Component {
               <input type="submit" value="Get Info" className="submitStock" />
               <input type="submit" value="Buy" className="submitStock" onClick={this.buyStock}/>
             </form>
+            <div className="ai">
+              <p>Finance Analyst Rating: {this.state.ai.FAR}</p>
+              <p>EPS Surprise Change: {this.state.ai.EPSSurpriseChange}</p>
+              <p>EPS Surprise Current: {this.state.ai.EPSSurpriseCurrent}</p>
+              <p>Finance Analyst Rating Metric: {this.state.ai.FARM}</p>
+              <p>Personal Metric Outcome: {this.state.ai.PMO}</p>
+            </div>
           </div>
         </div>
       </div>
