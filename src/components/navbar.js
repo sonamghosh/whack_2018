@@ -2,9 +2,26 @@ import React, { Component } from 'react';
 import AgAutocomplete from 'react-algoliasearch';
 
 class Navbar extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      currentScrollHeight: 0,
+    }
+  }
+
+  componentDidMount () {
+     window.onscroll = () => {
+      const newScrollHeight = Math.ceil(window.scrollY / 50) *50;
+      if (this.state.currentScrollHeight != newScrollHeight){
+          this.setState({currentScrollHeight: newScrollHeight})
+      }
+    }
+  }
   render() {
+    const opacity = Math.min(100 / this.state.currentScrollHeight  , 1)
+
     return(
-      <div className="navbar">
+      <div className="navbar" style={{opacity}}>
         <a className="logo" onClick={this.props.changeHome}>
           <img src={require('../images/stockfindar_straightlogo.png')} />
         </a>
