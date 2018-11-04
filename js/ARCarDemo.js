@@ -40,15 +40,13 @@ var ARCarDemo = createReactClass({
   render: function() {
     return (
       <ViroARScene>
-
         <ViroLightingEnvironment source={require('./res/tesla/garage_1k.hdr')}/>
         <ViroText text="Stock FindAR!" scale={[.5, .5, .5]} position={[0, 0, -1]} extrusionDepth={10} />
         <ViroARImageMarker target={"logo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.3, .3, .1]} materials={["grid"]} />
-            <ViroText text="Tesla" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Tesla" scale={[.3, .3, .2]} position={[0, .25, 0]} extrusionDepth={10} />
           </ViroNode>
-
           <Viro3DObject
             scale={[0, 0, 0]}
             source={require('./res/tesla/Lightbulb.obj')}
@@ -58,7 +56,6 @@ var ARCarDemo = createReactClass({
             materials={this.state.texture}
             onClick={this._toggleButtons}
             animation={{name:"scaleCar", run:this.state.animateCar,}} />
-
           <ViroSpotLight
             innerAngle={5}
             outerAngle={25}
@@ -70,18 +67,16 @@ var ARCarDemo = createReactClass({
             shadowNearZ={2}
             shadowFarZ={7}
             shadowOpacity={.7} />
-
           <ViroQuad
             rotation={[-90, 0, 0]}
             position={[0, -0.001, 0]}
             width={2.5} height={2.5}
             arShadowReceiver={true} />
-
         </ViroARImageMarker>
 
         <ViroARImageMarker target={"fidelitylogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
           <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
-            <ViroBox position={[0, .25, 0]} scale={[.3, .3, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
             <ViroText text="Fidelity" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
           </ViroNode>
           <Viro3DObject
@@ -93,7 +88,6 @@ var ARCarDemo = createReactClass({
             materials={this.state.texture}
             onClick={this._toggleButtons}
             animation={{name:"scaleCar", run:this.state.animateCar,}} />
-
           <ViroSpotLight
             innerAngle={5}
             outerAngle={25}
@@ -105,15 +99,207 @@ var ARCarDemo = createReactClass({
             shadowNearZ={2}
             shadowFarZ={7}
             shadowOpacity={.7} />
-
           <ViroQuad
             rotation={[-90, 0, 0]}
             position={[0, -0.001, 0]}
             width={2.5} height={2.5}
             arShadowReceiver={true} />
+        </ViroARImageMarker>
 
+        <ViroARImageMarker target={"microsoftlogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
+          <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Microsoft" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+          </ViroNode>
+          <Viro3DObject
+            scale={[0, 0, 0]}
+            source={require('./res/tesla/Lightbulb.obj')}
+            resources={[require('./res/tesla/object_car.mtl'),
+                        ]}
+            type="OBJ"
+            materials={this.state.texture}
+            onClick={this._toggleButtons}
+            animation={{name:"scaleCar", run:this.state.animateCar,}} />
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={25}
+            direction={[0,-1,0]}
+            position={[0, 5, 1]}
+            color="#ffffff"
+            castsShadow={true}
+            shadowMapSize={2048}
+            shadowNearZ={2}
+            shadowFarZ={7}
+            shadowOpacity={.7} />
+          <ViroQuad
+            rotation={[-90, 0, 0]}
+            position={[0, -0.001, 0]}
+            width={2.5} height={2.5}
+            arShadowReceiver={true} />
+        </ViroARImageMarker>
+
+        <ViroARImageMarker target={"applelogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
+          <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Apple" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+          </ViroNode>
+          <Viro3DObject
+            scale={[0, 0, 0]}
+            source={require('./res/tesla/Lightbulb.obj')}
+            resources={[require('./res/tesla/object_car.mtl'),
+                        ]}
+            type="OBJ"
+            materials={this.state.texture}
+            onClick={this._toggleButtons}
+            animation={{name:"scaleCar", run:this.state.animateCar,}} />
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={25}
+            direction={[0,-1,0]}
+            position={[0, 5, 1]}
+            color="#ffffff"
+            castsShadow={true}
+            shadowMapSize={2048}
+            shadowNearZ={2}
+            shadowFarZ={7}
+            shadowOpacity={.7} />
+          <ViroQuad
+            rotation={[-90, 0, 0]}
+            position={[0, -0.001, 0]}
+            width={2.5} height={2.5}
+            arShadowReceiver={true} />
+        </ViroARImageMarker>
+
+        <ViroARImageMarker target={"googlelogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
+          <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Google" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+          </ViroNode>
+          <Viro3DObject
+            scale={[0, 0, 0]}
+            source={require('./res/tesla/Lightbulb.obj')}
+            resources={[require('./res/tesla/object_car.mtl'),
+                        ]}
+            type="OBJ"
+            materials={this.state.texture}
+            onClick={this._toggleButtons}
+            animation={{name:"scaleCar", run:this.state.animateCar,}} />
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={25}
+            direction={[0,-1,0]}
+            position={[0, 5, 1]}
+            color="#ffffff"
+            castsShadow={true}
+            shadowMapSize={2048}
+            shadowNearZ={2}
+            shadowFarZ={7}
+            shadowOpacity={.7} />
+          <ViroQuad
+            rotation={[-90, 0, 0]}
+            position={[0, -0.001, 0]}
+            width={2.5} height={2.5}
+            arShadowReceiver={true} />
+        </ViroARImageMarker>
+
+        <ViroARImageMarker target={"netflixlogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
+          <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Netflix" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+          </ViroNode>
+          <Viro3DObject
+            scale={[0, 0, 0]}
+            source={require('./res/tesla/Lightbulb.obj')}
+            resources={[require('./res/tesla/object_car.mtl'),
+                        ]}
+            type="OBJ"
+            materials={this.state.texture}
+            onClick={this._toggleButtons}
+            animation={{name:"scaleCar", run:this.state.animateCar,}} />
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={25}
+            direction={[0,-1,0]}
+            position={[0, 5, 1]}
+            color="#ffffff"
+            castsShadow={true}
+            shadowMapSize={2048}
+            shadowNearZ={2}
+            shadowFarZ={7}
+            shadowOpacity={.7} />
+          <ViroQuad
+            rotation={[-90, 0, 0]}
+            position={[0, -0.001, 0]}
+            width={2.5} height={2.5}
+            arShadowReceiver={true} />
+        </ViroARImageMarker>
+
+        <ViroARImageMarker target={"tripadvisorlogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
+          <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Trip Advisor" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+          </ViroNode>
+          <Viro3DObject
+            scale={[0, 0, 0]}
+            source={require('./res/tesla/Lightbulb.obj')}
+            resources={[require('./res/tesla/object_car.mtl'),
+                        ]}
+            type="OBJ"
+            materials={this.state.texture}
+            onClick={this._toggleButtons}
+            animation={{name:"scaleCar", run:this.state.animateCar,}} />
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={25}
+            direction={[0,-1,0]}
+            position={[0, 5, 1]}
+            color="#ffffff"
+            castsShadow={true}
+            shadowMapSize={2048}
+            shadowNearZ={2}
+            shadowFarZ={7}
+            shadowOpacity={.7} />
+          <ViroQuad
+            rotation={[-90, 0, 0]}
+            position={[0, -0.001, 0]}
+            width={2.5} height={2.5}
+            arShadowReceiver={true} />
+        </ViroARImageMarker>
+
+        <ViroARImageMarker target={"amazonlogo"} onAnchorFound={this._onAnchorFound} pauseUpdates={this.state.pauseUpdates}>
+          <ViroNode scale={[0, 0, 0]} transformBehaviors={["billboardY"]} animation={{name:this.state.animName, run:this.state.playAnim,}}>
+            <ViroBox position={[0, .25, 0]} scale={[.2, .2, .1]} materials={["grid"]} animation={{name: "rotate", run: true, loop: true}} />
+            <ViroText text="Amazon" scale={[.3, .3, .2]} position={[0, -.3, 0]} extrusionDepth={10} />
+          </ViroNode>
+          <Viro3DObject
+            scale={[0, 0, 0]}
+            source={require('./res/tesla/Lightbulb.obj')}
+            resources={[require('./res/tesla/object_car.mtl'),
+                        ]}
+            type="OBJ"
+            materials={this.state.texture}
+            onClick={this._toggleButtons}
+            animation={{name:"scaleCar", run:this.state.animateCar,}} />
+          <ViroSpotLight
+            innerAngle={5}
+            outerAngle={25}
+            direction={[0,-1,0]}
+            position={[0, 5, 1]}
+            color="#ffffff"
+            castsShadow={true}
+            shadowMapSize={2048}
+            shadowNearZ={2}
+            shadowFarZ={7}
+            shadowOpacity={.7} />
+          <ViroQuad
+            rotation={[-90, 0, 0]}
+            position={[0, -0.001, 0]}
+            width={2.5} height={2.5}
+            arShadowReceiver={true} />
         </ViroARImageMarker>
       </ViroARScene>
+
+
     );
   },
   _onAnchorFound() {
@@ -235,6 +421,38 @@ ViroARTrackingTargets.createTargets({
     orientation : "Up",
     physicalWidth : 0.165 // real world width in meters
   },
+  microsoftlogo : {
+    source : require('./res/microsoft.jpg'),
+    orientation : "Up",
+    physicalWidth : 0.165 // real world width in meters
+  },
+  applelogo : {
+    source : require('./res/apple.jpg'),
+    orientation : "Up",
+    physicalWidth : 0.165 // real world width in meters
+  },
+  googlelogo : {
+    source : require('./res/google.jpg'),
+    orientation : "Up",
+    physicalWidth : 0.165 // real world width in meters
+  },
+  netflixlogo : {
+    source : require('./res/netflix.jpg'),
+    orientation : "Up",
+    physicalWidth : 0.165 // real world width in meters
+  },
+  tripadvisorlogo : {
+    source : require('./res/tripadvisor.png'),
+    orientation : "Up",
+    physicalWidth : 0.165 // real world width in meters
+  },
+  amazonlogo : {
+    source : require('./res/amazon.jpg'),
+    orientation : "Up",
+    physicalWidth : 0.165 // real world width in meters
+  },
+
+  //Tesla
   logo : {
     source : require('./res/logo.png'),
     orientation : "Up",
