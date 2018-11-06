@@ -1,0 +1,433 @@
+[
+{
+  "stock": "AAL",
+  "name": ""
+},
+{
+  "stock": "AAPL",
+  "name": ""
+},
+{
+  "stock": "ADBE",
+  "name": ""
+},
+{
+  "stock": "ADI",
+  "name": ""
+},
+{
+  "stock": "ADP",
+  "name": ""
+},
+{
+  "stock": "ADSK",
+  "name": ""
+},
+{
+  "stock": "AKAM",
+  "name": ""
+},
+{
+  "stock": "ALXN",
+  "name": ""
+},
+{
+  "stock": "AMAT",
+  "name": ""
+},
+{
+  "stock": "AMGN",
+  "name": ""
+},
+{
+  "stock": "AMZN",
+  "name": ""
+},
+{
+  "stock": "ATVI",
+  "name": ""
+},
+{
+  "stock": "AVGO",
+  "name": ""
+},
+{
+  "stock": "BBBY",
+  "name": ""
+},
+{
+  "stock": "BIDU",
+  "name": ""
+},
+{
+  "stock": "BIIB",
+  "name": ""
+},
+{
+  "stock": "BMRN",
+  "name": ""
+},
+{
+  "stock": "CA",
+  "name": ""
+},
+{
+  "stock": "CELG",
+  "name": ""
+},
+{
+  "stock": "CERN",
+  "name": ""
+},
+{
+  "stock": "CHKP",
+  "name": ""
+},
+{
+  "stock": "CHTR",
+  "name": ""
+},
+{
+  "stock": "CMCSA",
+  "name": ""
+},
+{
+  "stock": "COST",
+  "name": ""
+},
+{
+  "stock": "CSCO",
+  "name": ""
+},
+{
+  "stock": "CSX",
+  "name": ""
+},
+{
+  "stock": "CTRP",
+  "name": ""
+},
+{
+  "stock": "CTSH",
+  "name": ""
+},
+{
+  "stock": "CTXS",
+  "name": ""
+},
+{
+  "stock": "DISCA",
+  "name": ""
+},
+{
+  "stock": "DISCK",
+  "name": ""
+},
+{
+  "stock": "DISH",
+  "name": ""
+},
+{
+  "stock": "DLTR",
+  "name": ""
+},
+{
+  "stock": "EA",
+  "name": ""
+},
+{
+  "stock": "EBAY",
+  "name": ""
+},
+{
+  "stock": "ESRX",
+  "name": ""
+},
+{
+  "stock": "EXPE",
+  "name": ""
+},
+{
+  "stock": "FAST",
+  "name": ""
+},
+{
+  "stock": "FB",
+  "name": ""
+},
+{
+  "stock": "FISV",
+  "name": ""
+},
+{
+  "stock": "FOX",
+  "name": ""
+},
+{
+  "stock": "FOXA",
+  "name": ""
+},
+{
+  "stock": "GILD",
+  "name": ""
+},
+{
+  "stock": "GOOGL",
+  "name": ""
+},
+{
+  "stock": "HSIC",
+  "name": ""
+},
+{
+  "stock": "ILMN",
+  "name": ""
+},
+{
+  "stock": "INCY",
+  "name": ""
+},
+{
+  "stock": "INTC",
+  "name": ""
+},
+{
+  "stock": "INTU",
+  "name": ""
+},
+{
+  "stock": "ISRG",
+  "name": ""
+},
+{
+  "stock": "JD",
+  "name": ""
+},
+{
+  "stock": "KHC",
+  "name": ""
+},
+{
+  "stock": "LBTYA",
+  "name": ""
+},
+{
+  "stock": "LBTYK",
+  "name": ""
+},
+{
+  "stock": "LRCX",
+  "name": ""
+},
+{
+  "stock": "LVNTA",
+  "name": ""
+},
+{
+  "stock": "MAR",
+  "name": ""
+},
+{
+  "stock": "MAT",
+  "name": ""
+},
+{
+  "stock": "MCHP",
+  "name": ""
+},
+{
+  "stock": "MDLZ",
+  "name": ""
+},
+{
+  "stock": "MNST",
+  "name": ""
+},
+{
+  "stock": "MSFT",
+  "name": ""
+},
+{
+  "stock": "MU",
+  "name": ""
+},
+{
+  "stock": "MXIM",
+  "name": ""
+},
+{
+  "stock": "MYL",
+  "name": ""
+},
+{
+  "stock": "NCLH",
+  "name": ""
+},
+{
+  "stock": "NFLX",
+  "name": ""
+},
+{
+  "stock": "NTAP",
+  "name": ""
+},
+{
+  "stock": "NTES",
+  "name": ""
+},
+{
+  "stock": "NVDA",
+  "name": ""
+},
+{
+  "stock": "NXPI",
+  "name": ""
+},
+{
+  "stock": "ORLY",
+  "name": ""
+},
+{
+  "stock": "PAYX",
+  "name": ""
+},
+{
+  "stock": "PCAR",
+  "name": ""
+},
+{
+  "stock": "PCLN",
+  "name": ""
+},
+{
+  "stock": "PYPL",
+  "name": ""
+
+},
+{
+  "stock": "QCOM",
+  "name": ""
+
+},
+{
+  "stock": "QVCA",
+  "name": ""
+
+},
+{
+  "stock": "REGN",
+  "name": ""
+
+},
+{
+  "stock": "ROST",
+  "name": ""
+
+},
+{
+  "stock": "SBAC",
+  "name": ""
+
+},
+{
+  "stock": "SBUX",
+  "name": ""
+
+},
+{
+  "stock": "SIRI",
+  "name": ""
+
+
+},
+{
+  "stock": "SRCL",
+  "name": ""
+
+
+},
+{
+  "stock": "STX",
+  "name": ""
+
+
+},
+{
+  "stock": "SWKS",
+  "name": ""
+
+
+},
+{
+  "stock": "SYMC",
+  "name": ""
+
+
+},
+{
+  "stock": "TMUS",
+  "name": ""
+
+
+},
+{
+  "stock": "TRIP",
+  "name": ""
+
+
+},
+{
+  "stock": "TSCO",
+  "name": ""
+
+
+},
+{
+  "stock": "TSLA",
+  "name": ""
+
+
+},
+{
+  "stock": "TXN",
+  "name": ""
+
+
+},
+{
+  "stock": "ULTA",
+  "name": ""
+},
+{
+  "stock": "VIAB",
+  "name": ""
+},
+{
+  "stock": "VOD",
+  "name": ""
+},
+{
+  "stock": "VRSK",
+  "name": ""
+},
+{
+  "stock": "VRTX",
+  "name": ""
+},
+{
+  "stock": "WBA",
+  "name": ""
+},
+{
+  "stock": "WDC",
+  "name": ""
+},
+{
+  "stock": "XLNX",
+  "name": ""
+},
+{
+  "stock": "XRAY",
+  "name": ""
+}
+]

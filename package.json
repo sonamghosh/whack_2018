@@ -1,4 +1,4 @@
-{
+{D
   "name": "ViroSample",
   "version": "0.0.1",
   "private": true,
@@ -20,4 +20,35 @@
   "jest": {
     "preset": "react-native"
   }
+  "name": "stock-find-ar",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "algolia-react-autocomplete": "^1.0.5",
+    "algoliasearch": "^3.30.0",
+    "authorizenet": "^1.0.6",
+    "autocomplete.js": "^0.31.0",
+    "onedb-client": "^0.1.2",
+    "orama": "^2.0.6",
+    "react": "^16.6.0",
+    "react-algoliasearch": "^2.1.3",
+    "react-dom": "^16.6.0",
+    "react-redux": "^5.1.0",
+    "react-scripts": "2.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
